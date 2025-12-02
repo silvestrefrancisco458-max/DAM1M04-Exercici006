@@ -1,132 +1,109 @@
 /*============================================INICIO====================================*/
-:root {
-  --colorPrincipal: #1976d2;
-  --colorPrincipalHover: #125da3;
-  --colorText: #333;
-}
-
+/* ====== ESTILS GENERALS ====== */
 body {
-  align-items: flex-start;
-  background: #f2f2f2;
-  display: flex;
-  font-family: "Open Sans", sans-serif;
-  justify-content: center;
-  min-height: 100vh;
-  padding-top: 40px;
+    font-family: "Poppins", sans-serif;
+    background: #eef1f7;
+    margin: 0;
+    padding: 0;
 }
 
-/* Formulari */
-form.formulari {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 40px;
-  width: 360px;
+/* Contenidor principal */
+.container {
+    max-width: 850px;
+    background: white;
+    padding: 30px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
-/* Camps */
-.camp {
-  margin-bottom: 50px;
-  position: relative;
+/* Títol */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
 }
 
-/* Inputs, textarea i select */
-.camp textarea,
-.camp select {
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  padding: 10px 12px;
-  transition: border-color 0.3s ease;
-  width: 100%;
+/* ====== GRUPS DEL FORMULARI ====== */
+.group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
 }
 
-.camp textarea {
-  resize: vertical;
-  min-height: 100px;
+label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
 }
 
-.camp select:focus,
-.camp textarea:focus {
-  border-color: var(--colorPrincipal);
-  outline: none;
+/* Inputs generals */
+input, select, textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    font-size: 15px;
+    transition: all .25s ease;
+    outline: none;
 }
 
-/* Label flotant */
-.floating {
-  background: white;
-  color: #81888f;
-  font-size: 16px;
-  left: 14px;
-  padding: 0 4px;
-  pointer-events: none;
-  position: absolute;
-  top: 10px;
-  transition: all 0.3s ease;
+/* ====== ESTATS :FOCUS ====== */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #4a6cff;
+    box-shadow: 0 0 8px rgba(74,108,255,0.4);
 }
 
-/* Quan el camp té focus o text (només per textarea) */
-.camp:has(textarea:focus) .floating,
-.camp textarea:not(:placeholder-shown) + .floating {
-  color: var(--colorPrincipal);
-  font-size: 12px;
-  top: -10px;
+/* ====== VALIDACIÓ (VALID / INVALID) ====== */
+input:valid {
+    border-color: #28a745;
 }
 
-/* Label fix per als SELECT — sempre flotant */
-.floating.fixed {
-  color: var(--colorPrincipal);
-  font-size: 12px;
-  top: -10px;
+input:invalid {
+    border-color: #dc3545;
 }
 
-/* Fletxa decorativa per select simple */
-.camp select:not([multiple]) {
-  appearance: none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #888 50%),
-    linear-gradient(135deg, #888 50%, transparent 50%),
-    linear-gradient(to right, transparent, transparent);
-  background-position:
-    calc(100% - 18px) calc(50% - 3px),
-    calc(100% - 12px) calc(50% - 3px),
-    calc(100% - 30px) 0;
-  background-size: 6px 6px, 6px 6px, 1px 100%;
-  background-repeat: no-repeat;
-  padding-right: 36px;
+/* LLISTES CHECK / RADIO */
+.checks, .radios {
+    display: grid;
+    gap: 5px;
 }
 
-/* Select múltiple */
-.camp select[multiple] {
-  height: auto;
-  padding-right: 10px;
+/* ====== BOTONS ====== */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-/* Text d’ajuda sota el múltiple */
-.ajuda {
-  margin-top: 6px;
-  font-size: 13px;
-  color: #666;
-}
-
-/* Botó */
 button {
-  background: var(--colorPrincipal);
-  border: none;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 12px;
-  transition: background 0.3s ease;
-  width: 100%;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
 }
 
-button:hover {
-  background: var(--colorPrincipalHover);
+/* ENVIAR */
+button[type="submit"] {
+    background: #4a6cff;
+    color: white;
 }
 
+button[type="submit"]:hover {
+    background: #3b55cc;
+}
+
+/* RESET */
+.reset {
+    background: #ccc;
+    color: #222;
+}
+
+.reset:hover {
+    background: #999;
+    
 /*==========================================INTERACCIO==================================*/
