@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interacció CSS — Part 2</title>
+  <link rel="stylesheet" href="estils.css">
+</head>
+
+<body id="pagina-interaccio">
+
+  <!-- ==============================
+       ELEMENTS D'INPUT GLOBALS
+       (estan en el top perquè :has() pugui detectar-los)
+       ============================== -->
+
+  <!-- Toggle menu (checkbox ocult) -->
+  <input type="checkbox" id="menu-toggle" class="ocult" />
+
+  <!-- Tabs: radios ocults (name="tab") -->
+  <input type="radio" name="tab" id="tab1" class="ocult" checked>
+  <input type="radio" name="tab" id="tab2" class="ocult">
+  <input type="radio" name="tab" id="tab3" class="ocult">
+
+  <!-- Flip control (checkbox) -->
+  <input type="checkbox" id="flip" class="ocult">
+
+  <!-- ==============================
+       NAVBAR (flex) — desktop sticky, mobile toggle
+       ============================== -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a class="brand" href="index.html">MiFormulario</a>
+    </div>
+
+    <!-- etiqueta que actua com a botó hamburguer en mòbil -->
+    <label for="menu-toggle" class="hamburger" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="nav-links">
+      <a href="index.html">Index</a>
+      <a href="interaccio.html" class="active">Interacció</a>
+      <a href="#seccio">Secció</a>
+      <a href="#contacte">Contacte</a>
+    </nav>
+  </header>
+
+  <!-- ==============================
+       CONTINGUT PRINCIPAL (flex layout)
+       ============================== -->
+  <main class="main">
+    <section class="left-col">
+
+      <!-- ======= PESTANYES (tabs) ======= -->
+      <div class="tabs">
+        <div class="tab-buttons" role="tablist" aria-label="Pestanyes CSS">
+          <label for="tab1" class="tab">Pestanya 1</label>
+          <label for="tab2" class="tab">Pestanya 2</label>
+          <label for="tab3" class="tab">Pestanya 3</label>
+        </div>
+
+        <div class="tab-contents">
+          <!-- Default / tab1 -->
+          <div class="content content-1">
+            <h2>Contingut 1</h2>
+            <p>Aquesta pestanya es mostra quan <code>#tab1</code> està seleccionat.</p>
+          </div>
+
+          <div class="content content-2">
+            <h2>Contingut 2</h2>
+            <p>Contingut diferent per a la pestanya 2.</p>
+          </div>
+
+          <div class="content content-3">
+            <h2>Contingut 3</h2>
+            <p>Pestanya 3 — aquí posa el que vulguis.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= FLIP CARD CONTROLADA PER CHECKBOX ======= -->
+      <div class="flip-area">
+        <!-- label controla el checkbox #flip -->
+        <label for="flip" class="flip-toggle">Gira la targeta</label>
+
+        <div class="flip-card">
+          <div class="inner">
+            <div class="front">
+              <h3>Front</h3>
+              <p>Prem el botó per girar.</p>
+            </div>
+            <div class="back">
+              <h3>Back</h3>
+              <p>Aquest és el revers de la tarjeta.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <aside class="right-col">
+
+      <!-- ======= PETIT FORMULARI AMB VALIDACIÓ VISUAL (mínim 3 camps) ======= -->
+      <form class="mini-form" novalidate>
+        <h3 id="contacte">Contacta</h3>
+
+        <label for="name">Nom (required)</label>
+        <input id="name" name="name" type="text" placeholder="Anna" required pattern="^[A-Za-zÀ-ÿ\s]{2,40}$" title="Nom vàlid: 2-40 lletres">
+
+        <label for="email2">Email (required)</label>
+        <input id="email2" name="email2" type="email" placeholder="exemple@domini.com" required>
+
+        <label for="tel2">Telèfon (9 dígits)</label>
+        <input id="tel2" name="tel2" type="tel" pattern="^[0-9]{9}$" placeholder="123456789" required>
+
+        <button type="submit" class="submit">Enviar</button>
+        <small class="hint">Validació amb <code>:valid</code> i <code>:invalid</code> (sense JS).</small>
+      </form>
+
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <small>Interacció CSS — Sense JavaScript · :has() demo</small>
+  </footer>
+
+</body>
+</html>

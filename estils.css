@@ -8,7 +8,7 @@ body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
-    
+
     /* Fondo espacial + luz suave */
     background:
         radial-gradient(circle at 20% 30%, rgba(90,120,255,0.35), transparent 70%),
@@ -176,3 +176,238 @@ button[type="submit"]:hover {
 }
 
 /*==========================================INTERACCIO==================================*/
+/* ===========================
+   INTERACCIO.CSS - Estils
+   =========================== */
+
+/* Reset / base */
+:root{
+  --bg-1: #0b1020;
+  --bg-2: #112038;
+  --accent: #6a7cff;
+  --muted: #9aa6c7;
+  --card: #0f1724;
+  --glass: rgba(255,255,255,0.03);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #e6eef8;
+  background: radial-gradient(1200px 400px at 10% 10%, rgba(106,124,255,0.12), transparent 12%),
+              radial-gradient(900px 300px at 85% 75%, rgba(255,80,170,0.08), transparent 12%),
+              linear-gradient(180deg,var(--bg-1), var(--bg-2));
+  min-height:100vh;
+}
+
+/* ---------- ocult inputs helpers ---------- */
+.ocult { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); border:0; }
+
+/* ========== NAVBAR (flex + sticky desktop) ========== */
+.navbar{
+  position: sticky;
+  top: 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+  z-index: 40;
+}
+
+/* brand */
+.brand{
+  color: #fff;
+  font-weight:700;
+  text-decoration:none;
+  letter-spacing:0.4px;
+}
+
+/* nav links - desktop */
+.nav-links{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.nav-links a{
+  color:var(--muted);
+  text-decoration:none;
+  padding:8px 10px;
+  border-radius:8px;
+  transition: all .18s ease;
+}
+.nav-links a:hover{ color: #fff; background: rgba(255,255,255,0.03); transform: translateY(-2px); }
+.nav-links a.active{ color:#fff; background: linear-gradient(90deg, rgba(106,124,255,0.14), rgba(0,234,255,0.03)); border:1px solid rgba(106,124,255,0.06); }
+
+/* hamburger (mobile) */
+.hamburger{
+  display:none; /* visible only on small screens */
+  width:44px; height:36px;
+  align-items:center; justify-content:center;
+  cursor:pointer;
+  border-radius:8px;
+}
+.hamburger span{
+  display:block; height:3px; width:20px; margin:3px 0; background: #dce6ff; border-radius:2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* cuando menu-toggle está checked, animar la hamburguesa */
+#menu-toggle:checked + #tab1 ~ #tab2 ~ #tab3 ~ #flip ~ .navbar .hamburger span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+#menu-toggle:checked + #tab1 ~ #tab2 ~ #tab3 ~ #flip ~ .navbar .hamburger span:nth-child(2){ opacity: 0; }
+#menu-toggle:checked + #tab1 ~ #tab2 ~ #tab3 ~ #flip ~ .navbar .hamburger span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+/* ========== MAIN LAYOUT (flex) ========== */
+.main{
+  display:flex;
+  gap:22px;
+  align-items:flex-start;
+  padding:28px;
+  max-width:1100px;
+  margin: 20px auto;
+}
+
+/* left / right columns */
+.left-col{ flex: 1.25; min-width:260px; }
+.right-col{ flex: 0.9; min-width:260px; }
+
+/* cards / blocks */
+.tabs, .flip-area, .mini-form{
+  background: rgba(255,255,255,0.03);
+  border-radius:10px;
+  padding:18px;
+  margin-bottom:18px;
+  border:1px solid rgba(255,255,255,0.03);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.tabs:hover, .flip-area:hover, .mini-form:hover{ transform: translateY(-4px); box-shadow: 0 10px 30px rgba(10,14,30,0.35); }
+
+/* ===== TABS ===== */
+.tab-buttons{ display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+.tab{
+  padding:8px 12px;
+  cursor:pointer;
+  background: transparent;
+  color: var(--muted);
+  border-radius:8px;
+  transition: all .18s ease;
+  border:1px solid transparent;
+}
+
+/* marcada visual: use :has() sobre body para activar segun radio checked */
+#pagina-interaccio:has(#tab1:checked) .tab-buttons label[for="tab1"],
+#pagina-interaccio:has(#tab2:checked) .tab-buttons label[for="tab2"],
+#pagina-interaccio:has(#tab3:checked) .tab-buttons label[for="tab3"]{
+  color: #fff;
+  background: linear-gradient(90deg, rgba(106,124,255,0.14), rgba(0,234,255,0.03));
+  border-color: rgba(106,124,255,0.06);
+  transform: translateY(-2px);
+}
+
+/* TAB CONTENTS: per defecte ocult */
+.content{ display:none; opacity:0; transform: translateY(6px); transition: all .28s ease; line-height:1.45; color: #dfe9ff; }
+
+/* MOSTRAR contingut actiu amb :has() */
+#pagina-interaccio:has(#tab1:checked) .content-1,
+#pagina-interaccio:has(#tab2:checked) .content-2,
+#pagina-interaccio:has(#tab3:checked) .content-3{
+  display:block; opacity:1; transform: translateY(0);
+}
+
+/* Fallback: si el navegador NO suporta :has(), fem servir selectors de germà (els radios estan abans del .tabs container),
+   això permet mostrar contingut també sense :has() (bon prat). */
+#tab1:checked ~ .navbar ~ .main .left-col .tabs .tab-contents .content-1 { display:block; opacity:1; transform: translateY(0); }
+#tab2:checked ~ .navbar ~ .main .left-col .tabs .tab-contents .content-2 { display:block; opacity:1; transform: translateY(0); }
+#tab3:checked ~ .navbar ~ .main .left-col .tabs .tab-contents .content-3 { display:block; opacity:1; transform: translateY(0); }
+
+/* ====== FLIP CARD ====== */
+.flip-toggle{
+  display:inline-block;
+  margin-bottom:12px;
+  padding:8px 12px;
+  cursor:pointer;
+  border-radius:8px;
+  background: rgba(255,255,255,0.02);
+  color:var(--muted);
+  transition: all .18s ease;
+}
+.flip-toggle:hover{ transform: translateY(-3px); color:#fff; }
+
+/* flip-card structure */
+.flip-card{ perspective: 1200px; width:100%; max-width:320px; margin: 0 auto; }
+.flip-card .inner{
+  width:100%;
+  position:relative;
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.2,.9,.3,1);
+  border-radius:12px;
+  min-height:160px;
+}
+.flip-card .front,
+.flip-card .back{
+  position:absolute;
+  inset:0;
+  backface-visibility: hidden;
+  border-radius:12px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.flip-card .front{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:#fff; }
+.flip-card .back{ background: linear-gradient(180deg, rgba(106,124,255,0.12), rgba(0,234,255,0.03)); transform: rotateY(180deg); color:#021029; }
+
+/* girar la targeta quan #flip està checked — aquí usem :has() sobre el body */
+#pagina-interaccio:has(#flip:checked) .flip-card .inner {
+  transform: rotateY(180deg);
+}
+
+/* fallback sibling selector per navegadors sense :has() */
+#flip:checked ~ .navbar ~ .main .left-col .flip-area .flip-card .inner { transform: rotateY(180deg); }
+
+/* ===== MINI FORM (validació visuals) ===== */
+.mini-form label{ display:block; margin-top:8px; color: var(--muted); font-size:0.95rem; }
+.mini-form input{
+  width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06);
+  margin-top:6px; background: transparent; color:#eaf0ff; transition: all .16s ease;
+}
+.mini-form input:focus{ box-shadow: 0 6px 18px rgba(106,124,255,0.12); border-color: var(--accent); outline:none; transform: translateY(-2px); }
+
+/* valid / invalid */
+.mini-form input:valid{ box-shadow: inset 0 0 0 2px rgba(46,204,113,0.08); border-color: rgba(46,204,113,0.6); }
+.mini-form input:invalid{ box-shadow: inset 0 0 0 2px rgba(231,76,60,0.06); border-color: rgba(231,76,60,0.6); }
+
+/* submit */
+.mini-form .submit{
+  margin-top:12px;
+  padding:10px 14px;
+  background: var(--accent); color:#fff; border-radius:8px; border:none; cursor:pointer; font-weight:600;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.mini-form .submit:hover{ transform: translateY(-3px); box-shadow: 0 8px 26px rgba(106,124,255,0.16); }
+
+/* footer */
+.footer{ text-align:center; padding:20px; color:var(--muted); }
+
+/* ========== RESPONSIVE: mobile behaviour ========== */
+@media (max-width: 820px){
+
+  .main{ flex-direction:column; padding:16px; }
+
+  /* show hamburger, hide desktop nav links */
+  .hamburger{ display:flex; }
+  .nav-links{ display:none; position:absolute; right:12px; top:62px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:12px; border-radius:10px; flex-direction:column; gap:8px; min-width:160px; border:1px solid rgba(255,255,255,0.03); }
+
+  /* cuando #menu-toggle checked -> mostrar el menú (usant :has() i fallback) */
+  /* :has() variant */
+  #pagina-interaccio:has(#menu-toggle:checked) .nav-links { display:flex; }
+  /* fallback */
+  #menu-toggle:checked ~ .navbar .nav-links { display:flex; }
+
+  .left-col, .right-col{ min-width: auto; width:100%; }
+}
