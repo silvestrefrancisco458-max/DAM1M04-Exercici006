@@ -2,19 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="estils.css">
+    <title>Formulari De Registro</title>
+
+    <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="estils.css">
-    <title>Formulari De Registro</title>
 </head>
 <body>
-<div class="container"></div>
 
-    <h1>Formulari De Registre</h1>
-    <form novalidate>
-            <!--NOMBRE COMPLETO-->
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+
+        <h1>Formulari De Registre</h1>
+
+        <form novalidate>
+
+            <!-- NOMBRE COMPLETO -->
             <div class="group">
                 <label for="nom">Nom complet</label>
                 <input type="text" id="nom" 
@@ -22,14 +29,12 @@
                       pattern="^[A-Za-zÀ-ÿ\s]{3,40}$"
                       title="Nom vàlid: només lletres i espais, mínim 3 caràcters"
                       required>
-                <span class="msg"></span>
             </div>
 
             <!-- EMAIL -->
             <div class="group">
                 <label for="email">Correu electrònic</label>
                 <input type="email" id="email" placeholder="exemple@gmail.com" required>
-                <span class="msg"></span>
             </div>
 
             <!-- TELÈFON -->
@@ -40,30 +45,25 @@
                     pattern="^[0-9]{9}$"
                     title="Només 9 dígits"
                     required>
-                <span class="msg"></span>
             </div>
 
             <!-- EDAD -->
             <div class="group">
                 <label for="edat">Edat</label>
                 <input type="number" id="edat" min="18" max="99" required>
-                <span class="msg"></span>
             </div>
 
-            <!-- DATA -->
+            <!-- FECHA -->
             <div class="group">
                 <label for="naix">Data de naixement</label>
                 <input type="date" id="naix" required>
-                <span class="msg"></span>
             </div>
 
-            <!-- FRANJA -->
+            <!-- HORA -->
             <div class="group">
                 <label for="hora">Franja horària preferida</label>
                 <input type="time" id="hora" required>
-                <span class="msg"></span>
             </div>
-
 
             <!-- COLOR -->
             <div class="group">
@@ -90,7 +90,7 @@
 
             <!-- RADIO -->
             <div class="group">
-                <label>Nivell de estudis</label>
+                <label>Nivell d’estudis</label>
                 <div class="multi">
                     <label><input type="radio" name="estudis" required> ESO</label>
                     <label><input type="radio" name="estudis"> Batxillerat</label>
@@ -100,31 +100,34 @@
                 </div>
             </div>
 
-            <!-- SELECT PAIS -->
+            <!-- SELECT -->
             <div class="group">
-                <label for="pais">Pais</label>
+                <label for="pais">País</label>
                 <select id="pais" required>
-                    <option value="">-- Seleiona --</option>
-                    <option> Espanya</option>
-                    <option> França</option>
-                    <option> Alemanya</option>
-                    <option> Italia</option>
-                    <option> Portugal</option>
+                    <option value="">-- Selecciona --</option>
+                    <option>Espanya</option>
+                    <option>França</option>
+                    <option>Alemanya</option>
+                    <option>Itàlia</option>
+                    <option>Portugal</option>
                 </select>
             </div>
 
             <!-- TEXTAREA -->
             <div class="group">
                 <label for="coment">Comentaris</label>
-                <textarea id="coment" rows="4" placeholder="Escriu els teus Comentaris aqui..."></textarea>
+                <textarea id="coment" rows="4" placeholder="Escriu els teus comentaris aquí..."></textarea>
             </div>
 
-            <!-- BOTONS -->
+            <!-- BOTONES -->
             <div class="buttons">
                 <button type="submit">Enviar</button>
                 <button type="reset" class="reset">Esborrar</button>
             </div>
-    </form>
-</div>
+
+        </form>
+
+    </div> <!-- FIN CONTAINER -->
+
 </body>
 </html>
