@@ -1,131 +1,156 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Interacció CSS — Part 2</title>
-  <link rel="stylesheet" href="estils.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactivitat CSS</title>
+    <link rel="stylesheet" href="estils.css">
 </head>
 
 <body id="pagina-interaccio">
+<div class="container">
 
-  <!-- ==============================
-       ELEMENTS D'INPUT GLOBALS
-       (estan en el top perquè :has() pugui detectar-los)
-       ============================== -->
+    <!-- =======================
+         NAVBAR RESPONSIVA
+    ======================== -->
+    <header class="navbar">
 
-  <!-- Toggle menu (checkbox ocult) -->
-  <input type="checkbox" id="menu-toggle" class="ocult" />
+        <div class="nav-brand">
+            <span class="logo"></span>
+            Interacció CSS
+        </div>
 
-  <!-- Tabs: radios ocults (name="tab") -->
-  <input type="radio" name="tab" id="tab1" class="ocult" checked>
-  <input type="radio" name="tab" id="tab2" class="ocult">
-  <input type="radio" name="tab" id="tab3" class="ocult">
+        <!-- Checkbox ocult -->
+        <input type="checkbox" id="nav-toggle">
 
-  <!-- Flip control (checkbox) -->
-  <input type="checkbox" id="flip" class="ocult">
+        <!-- Icona hamburguesa -->
+        <label class="nav-toggle-label" for="nav-toggle">
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </label>
 
-  <!-- ==============================
-       NAVBAR (flex) — desktop sticky, mobile toggle
-       ============================== -->
-  <header class="navbar">
-    <div class="nav-left">
-      <a class="brand" href="index.html">MiFormulario</a>
+        <!-- Enllaços menú -->
+        <nav class="nav-links">
+            <a href="index.html">Formulari</a>
+            <a href="interaccio.html">Interactivitat</a>
+        </nav>
+    </header>
+
+    <!-- ==========================
+         CONTINGUT PRINCIPAL
+    =========================== -->
+    <div class="main">
+
+        <!-- ==========================
+             PESTANYES (TABS CSS)
+        =========================== -->
+        <section class="card">
+            <h2 class="h1">Pestanyes amb CSS</h2>
+
+            <!-- Inputs ocults (radio) -->
+            <input type="radio" name="tab" id="tab1" checked hidden>
+            <input type="radio" name="tab" id="tab2" hidden>
+            <input type="radio" name="tab" id="tab3" hidden>
+
+            <!-- Botons -->
+            <div class="tabs">
+                <label for="tab1">Pestanya 1</label>
+                <label for="tab2">Pestanya 2</label>
+                <label for="tab3">Pestanya 3</label>
+            </div>
+
+            <!-- CONTINGUT -->
+            <div class="tab-content">
+                <div class="tab-panel content-1">
+                    <h3 class="h2">Contingut 1</h3>
+                    <p>Aquest és el contingut de la primera pestanya.</p>
+                </div>
+
+                <div class="tab-panel content-2">
+                    <h3 class="h2">Contingut 2</h3>
+                    <p>Aquí hi ha el contingut de la segona pestanya.</p>
+                </div>
+
+                <div class="tab-panel content-3">
+                    <h3 class="h2">Contingut 3</h3>
+                    <p>Contingut de la tercera pestanya.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================
+             FORMULARI (VALIDACIÓ)
+        =========================== -->
+        <section class="card">
+            <h2 class="h1">Formulari amb validació CSS</h2>
+
+            <form>
+                <div class="form-row">
+                    <label for="nom">Nom (obligatori)</label>
+                    <input class="input" id="nom" type="text" required minlength="2">
+                    <span class="form-help">Ha de tenir com a mínim 2 caràcters.</span>
+                </div>
+
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input class="input" id="email" type="email" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="codi">Codi (format ABC-123)</label>
+                    <input class="input" id="codi" type="text" pattern="[A-Z]{3}-[0-9]{3}" required>
+                    <span class="form-help">Format: tres lletres, guió, tres números.</span>
+                </div>
+
+                <button class="btn" type="submit">Enviar</button>
+            </form>
+        </section>
+
+        <!-- ==========================
+             COMPONENT EXTRA: CAROUSEL
+        =========================== -->
+        <section class="card">
+            <h2 class="h1">Carrusel amb només CSS</h2>
+
+            <!-- Radios del carrusel -->
+            <input type="radio" name="carousel" id="c1" checked hidden>
+            <input type="radio" name="carousel" id="c2" hidden>
+            <input type="radio" name="carousel" id="c3" hidden>
+
+            <!-- Vista -->
+            <div class="carousel">
+                <div class="carousel-viewport">
+                    <div class="slides">
+
+                        <section class="slide">
+                            <h3 class="h2">Slide 1</h3>
+                            <p>Primer slide del carrusel.</p>
+                        </section>
+
+                        <section class="slide">
+                            <h3 class="h2">Slide 2</h3>
+                            <p>Segon slide animat amb CSS.</p>
+                        </section>
+
+                        <section class="slide">
+                            <h3 class="h2">Slide 3</h3>
+                            <p>Tercer slide. Tot sense JavaScript.</p>
+                        </section>
+
+                    </div>
+                </div>
+
+                <!-- Dots -->
+                <div class="carousel-dots">
+                    <label for="c1"></label>
+                    <label for="c2"></label>
+                    <label for="c3"></label>
+                </div>
+            </div>
+        </section>
+
     </div>
-
-    <!-- etiqueta que actua com a botó hamburguer en mòbil -->
-    <label for="menu-toggle" class="hamburger" aria-hidden="true">
-      <span></span><span></span><span></span>
-    </label>
-
-    <nav class="nav-links">
-      <a href="index.html">Index</a>
-      <a href="interaccio.html" class="active">Interacció</a>
-      <a href="#seccio">Secció</a>
-      <a href="#contacte">Contacte</a>
-    </nav>
-  </header>
-
-  <!-- ==============================
-       CONTINGUT PRINCIPAL (flex layout)
-       ============================== -->
-  <main class="main">
-    <section class="left-col">
-
-      <!-- ======= PESTANYES (tabs) ======= -->
-      <div class="tabs">
-        <div class="tab-buttons" role="tablist" aria-label="Pestanyes CSS">
-          <label for="tab1" class="tab">Pestanya 1</label>
-          <label for="tab2" class="tab">Pestanya 2</label>
-          <label for="tab3" class="tab">Pestanya 3</label>
-        </div>
-
-        <div class="tab-contents">
-          <!-- Default / tab1 -->
-          <div class="content content-1">
-            <h2>Contingut 1</h2>
-            <p>Aquesta pestanya es mostra quan <code>#tab1</code> està seleccionat.</p>
-          </div>
-
-          <div class="content content-2">
-            <h2>Contingut 2</h2>
-            <p>Contingut diferent per a la pestanya 2.</p>
-          </div>
-
-          <div class="content content-3">
-            <h2>Contingut 3</h2>
-            <p>Pestanya 3 — aquí posa el que vulguis.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ======= FLIP CARD CONTROLADA PER CHECKBOX ======= -->
-      <div class="flip-area">
-        <!-- label controla el checkbox #flip -->
-        <label for="flip" class="flip-toggle">Gira la targeta</label>
-
-        <div class="flip-card">
-          <div class="inner">
-            <div class="front">
-              <h3>Front</h3>
-              <p>Prem el botó per girar.</p>
-            </div>
-            <div class="back">
-              <h3>Back</h3>
-              <p>Aquest és el revers de la tarjeta.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <aside class="right-col">
-
-      <!-- ======= PETIT FORMULARI AMB VALIDACIÓ VISUAL (mínim 3 camps) ======= -->
-      <form class="mini-form" novalidate>
-        <h3 id="contacte">Contacta</h3>
-
-        <label for="name">Nom (required)</label>
-        <input id="name" name="name" type="text" placeholder="Anna" required pattern="^[A-Za-zÀ-ÿ\s]{2,40}$" title="Nom vàlid: 2-40 lletres">
-
-        <label for="email2">Email (required)</label>
-        <input id="email2" name="email2" type="email" placeholder="exemple@domini.com" required>
-
-        <label for="tel2">Telèfon (9 dígits)</label>
-        <input id="tel2" name="tel2" type="tel" pattern="^[0-9]{9}$" placeholder="123456789" required>
-
-        <button type="submit" class="submit">Enviar</button>
-        <small class="hint">Validació amb <code>:valid</code> i <code>:invalid</code> (sense JS).</small>
-      </form>
-
-    </aside>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <small>Interacció CSS — Sense JavaScript · :has() demo</small>
-  </footer>
-
+</div>
 </body>
-</html>
+</html> 
