@@ -1,140 +1,185 @@
-/*============================================INICIO====================================*/
-/* ====== ESTILS GENERALS ====== */
-/* ========================================= */
-/*              FONDO MEJORADO               */
-/* ========================================= */
-
-body {
-    font-family: "Poppins", sans-serif;
+/* =========================================================
+   RESET GENERAL
+   ========================================================= */
+* {
     margin: 0;
     padding: 0;
-
-    /* Fondo espacial + luz suave */
-    background:
-        radial-gradient(circle at 20% 30%, rgba(90,120,255,0.35), transparent 70%),
-        radial-gradient(circle at 80% 70%, rgba(255,80,170,0.35), transparent 75%),
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 80%),
-        linear-gradient(135deg, #0a0c1a, #151729, #1b1f3b);
-
-    background-size: 200% 200%;
-    background-attachment: fixed;
-    animation: galaxyFloat 18s infinite alternate ease-in-out;
+    box-sizing: border-box;
 }
 
-/* Animación del fondo */
-@keyframes galaxyFloat {
-    0% {
-        background-position: 0% 0%;
-        filter: brightness(1);
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f3f4f7;
+    color: #222;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   NAVBAR SUPERIOR RESPONSIVA
+   ========================================================= */
+
+/* Contenidor barra superior */
+.navbar {
+    position: fixed;          /* Sempre visible a dalt */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #303f9f;
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+/* Marca / Logo */
+.nav-brand {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Icona logo (punt blau) */
+.logo {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffeb3b;
+}
+
+/* Checkbox que controla el menú (ocult) */
+#nav-toggle {
+    display: none;
+}
+
+/* Icona hamburguesa */
+.nav-toggle-label {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    margin: 5px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Enllaços del menú */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #ffeb3b;
+}
+
+/* ===============================
+   RESPONSIVE PER MÒBILS
+   =============================== */
+@media (max-width: 768px) {
+
+    /* Mostrar botó hamburguesa */
+    .nav-toggle-label {
+        display: block;
     }
-    100% {
-        background-position: 100% 100%;
-        filter: brightness(1.15);
+
+    /* Amagar els enllaços per defecte */
+    .nav-links {
+        position: absolute;
+        top: 58px;
+        left: 0;
+        width: 100%;
+        background: #303f9f;
+        flex-direction: column;
+        display: none;
+        padding: 10px 0;
+    }
+
+    /* Mostrar el menú quan checkbox està activat */
+    #nav-toggle:checked + .nav-toggle-label + .nav-links {
+        display: flex;
     }
 }
-/* Contenedor principal */
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
 .container {
-    max-width: 850px;
-    background: #fff;
-    padding: 35px;
-    margin: 50px auto;
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    animation: fadeIn 0.6s ease; /* Animación de entrada */
+    max-width: 900px;
+    background: white;
+    padding: 30px;
+    margin: 120px auto 40px; /* IMPORTANT → perquè no tapi la NAV */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* Título */
+/* Títol */
 h1 {
     text-align: center;
-    margin-bottom: 28px;
-    color: #2d2d2d;
-    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+    color: #303f9f;
 }
 
-/* Animación suave para el contenedor */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ========================================= */
-/*              GRUPS DEL FORMULARI          */
-/* ========================================= */
-
+/* =========================================================
+   GRUPS DE CAMP
+   ========================================================= */
 .group {
     margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
 }
 
-/* Label */
-label {
-    margin-bottom: 6px;
+/* Etiquetes */
+.group label {
     font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
     color: #444;
 }
 
-/* ========================================= */
-/*               INPUTS GENERALS             */
-/* ========================================= */
-input,
-select,
-textarea {
+/* Inputs, selects i textarea */
+.group input,
+.group select,
+.group textarea {
+    width: 100%;
     padding: 12px;
-    border-radius: 10px;
-    border: 2px solid #d0d0d0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
     font-size: 15px;
-    background: #fafafa;
-    transition: all .25s ease;
+    transition: 0.2s;
+}
+
+.group input:focus,
+.group select:focus,
+.group textarea:focus {
+    border-color: #303f9f;
     outline: none;
 }
 
-/* Estado focus (animación obligatoria) */
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #4a6cff;
-    background: #ffffff;
-    box-shadow: 0 0 10px rgba(74,108,255,0.35);
+/* Per checkbox i radio */
+.multi {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 25px;
+    margin-top: 8px;
 }
 
-/* ========================================= */
-/*               VALIDACIÓ                   */
-/* ========================================= */
-
-/* Correcte */
-input:valid {
-    border-color: #2ecc71;
-}
-
-/* Incorrecte */
-input:invalid {
-    border-color: #e74c3c;
-}
-
-/* ========================================= */
-/*             CHECKBOX / RADIO              */
-/* ========================================= */
-
-.checks,
-.radios {
-    display: grid;
-    gap: 6px;
-}
-
-/* Inputs de tipo checkbox y radio personalizados */
-input[type="checkbox"],
-input[type="radio"] {
-    accent-color: #4a6cff; /* Color moderno */
-    cursor: pointer;
-    width: 17px;
-    height: 17px;
-}
-
-/* ========================================= */
-/*                 BOTONES                   */
-/* ========================================= */
-
+/* =========================================================
+   BOTONS
+   ========================================================= */
 .buttons {
     display: flex;
     justify-content: center;
@@ -142,38 +187,29 @@ input[type="radio"] {
     margin-top: 25px;
 }
 
-/* Estilo general botón */
 button {
-    padding: 12px 28px;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
+    background: #303f9f;
+    color: white;
     border: none;
-    transition: all 0.25s ease;
-    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
-/* ENVIAR */
-button[type="submit"] {
-    background: #4a6cff;
-    color: #fff;
+button:hover {
+    background: #1a237e;
 }
 
-button[type="submit"]:hover {
-    background: #3b55cc;
-    transform: translateY(-2px); /* Efectito suave */
-}
-
-/* RESET */
 .reset {
-    background: #d3d3d3;
-    color: #222;
+    background: #d32f2f;
 }
 
 .reset:hover {
-    background: #b1b1b1;
-    transform: translateY(-2px);
+    background: #b71c1c;
 }
+
 
 /*==========================================INTERACCIO==================================*/
 /* ---------------------------------------------------
